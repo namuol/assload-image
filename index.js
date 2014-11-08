@@ -7,10 +7,14 @@
       var img;
       img = new Image;
       img.onload = function() {
-        return resolve(img);
+        resolve(img);
       };
-      img.onerror = function(e) {
-        return reject(e);
+      img.onerror = function(evt) {
+        var err;
+        err = new Error('Image failed to load. See the attached "event" and "image" attributes for details.');
+        err.event = evt;
+        err.image = img;
+        reject(err);
       };
       return img.src = path;
     };

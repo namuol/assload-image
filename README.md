@@ -20,7 +20,9 @@ assload.bundle({
 }).load().then(function () {
   console.log('Finished loading images');
 }, function (err) {
-  console.error('Failed to load image', err);
+  console.error(err.message);
+  console.error('Error event', err.event);
+  console.error('Image that failed', err.image);
 });
 ```
 

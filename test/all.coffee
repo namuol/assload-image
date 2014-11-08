@@ -3,20 +3,16 @@ loadImages = require '../index'
 
 class ValidImage
 Object.defineProperty ValidImage::, 'src',
-  get: -> @__src
   set: (val) ->
-    @__src = val
     setTimeout =>
-      @onload?()
+      @onload()
     , 0
 
 class InvalidImage
 Object.defineProperty InvalidImage::, 'src',
-  get: -> @__src
   set: (val) ->
-    @__src = val
     setTimeout =>
-      @onerror?({})
+      @onerror {}
     , 0
 
 describe = (item, cb) ->
@@ -32,8 +28,6 @@ describe 'assload-image', (it) ->
     loadedImage = null
     loadImages() 'test', (image) ->
       loadedImage = image
-    , (error) ->
-      t.fail 'didnt expect error to occur'
 
     setTimeout =>
       t.true loadedImage?
@@ -43,9 +37,7 @@ describe 'assload-image', (it) ->
   it 'should call reject method on fail', (t) ->
     global.Image = InvalidImage
     errored = false
-    loadImages() 'test', (image) ->
-      t.fail 'didnt expect to successfully load!'
-    , (error) ->
+    loadImages() 'test', null, (error) ->
       errored = true
 
     setTimeout =>

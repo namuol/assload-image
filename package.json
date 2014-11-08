@@ -1,6 +1,6 @@
 {
   "name": "assload-image",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Browser-side image loader for Assload.",
   "main": "index.js",
   "scripts": {
